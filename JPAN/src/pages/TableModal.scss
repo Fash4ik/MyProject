@@ -1,0 +1,174 @@
+@font-face {
+  font-family: 'Gill Sans Nova';
+  src: url('../fonts/GillSansNova-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* Фон убран, контейнер остаётся только для центрирования */
+.tablemodal-overlay {
+  position: fixed;
+  inset: 0; /* top:0; right:0; bottom:0; left:0 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  margin: 0;
+  padding: 0;
+  /* НЕ добавляй background-color */
+}
+
+/* Собственно окно */
+.tablemodal-window {
+  position: relative;
+  background-color: #2d2525;
+  border-radius: 12px;
+  width: 360px;
+  max-width: 90vw;
+  padding: 2rem 1.5rem;
+  color: #eee;
+  text-align: center;
+}
+
+/* Маленький крестик без видимой “кнопки” */
+.tablemodal-close {
+  all: unset;  /* Убирает все стили кнопки */
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  font-size: 1.4rem;
+  color: #fff;
+  cursor: pointer;
+  line-height: 1;
+  user-select: none;
+  width: auto;
+  height: auto;
+  padding: 0;
+  margin: 0;
+}
+
+.tablemodal-close:hover {
+  color: #83c1a7;
+}
+
+/* Заголовок и тексты */
+.tablemodal-window h2 {
+  margin-bottom: 1rem;
+  font-size: 1.8rem;
+  color: #83c1a7;
+  letter-spacing: 1px;
+}
+
+.tablemodal-window p {
+  margin: 0.5rem 0;
+  font-size: 1rem;
+  color: #ccc;
+}
+
+/* Поля ввода с ровными отступами */
+.tablemodal-window input[type='text'],
+.tablemodal-window input[type='tel'] {
+  width: calc(100% - 2rem); /* чтобы учитывать padding */
+  margin: 1rem auto 0;      /* сверху 1rem, по бокам auto */
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  border: 1px solid #555;
+  background-color: #3a2e2e;
+  color: #eee;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+  display: block;           /* чтобы margin auto работал */
+}
+
+.tablemodal-window input:focus {
+  border-color: #83c1a7;
+  outline: none;
+  background-color: #4a3a3a;
+}
+
+/* Стили кнопок, кроме крестика */
+.tablemodal-window button:not(.tablemodal-close) {
+  width: calc(100% - 2rem);
+  margin: 1.2rem auto 0;
+  padding: 0.8rem 1rem;
+  background-color: #83c1a7;
+  color: #1e1b1b;
+  border: none;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s;
+  display: block;
+}
+
+.tablemodal-window button:not(.tablemodal-close):hover:not(:disabled) {
+  background-color: #6fa58c;
+}
+
+.tablemodal-window button:not(.tablemodal-close):disabled {
+  background-color: #444;
+  cursor: not-allowed;
+}
+
+/* Вторая кнопка “Отмена” */
+.tablemodal-window button:not(.tablemodal-close) + button:not(.tablemodal-close) {
+  background-color: #444;
+  color: #ccc;
+}
+
+.tablemodal-window button:not(.tablemodal-close) + button:not(.tablemodal-close):hover {
+  background-color: #555;
+}
+
+
+@media (max-width: 768px) {
+  .tablemodal-window {
+    width: 90vw;
+    padding: 1.5rem 1rem;
+  }
+
+  .tablemodal-window h2 {
+    font-size: 1.5rem;
+  }
+
+  .tablemodal-window p {
+    font-size: 0.9rem;
+  }
+
+  .tablemodal-window input[type='text'],
+  .tablemodal-window input[type='tel'] {
+    width: 100%;
+    margin: 0.8rem auto 0;
+    padding: 0.5rem 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  .tablemodal-window button:not(.tablemodal-close) {
+    width: 100%;
+    margin: 1rem auto 0;
+    padding: 0.7rem 1rem;
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .tablemodal-window {
+    padding: 1rem 0.8rem;
+  }
+
+  .tablemodal-window h2 {
+    font-size: 1.3rem;
+  }
+
+  .tablemodal-window input[type='text'],
+  .tablemodal-window input[type='tel'] {
+    padding: 0.4rem 0.7rem;
+    font-size: 0.85rem;
+  }
+
+  .tablemodal-window button:not(.tablemodal-close) {
+    padding: 0.6rem 0.8rem;
+    font-size: 0.85rem;
+  }
+}

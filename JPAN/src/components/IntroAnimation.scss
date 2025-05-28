@@ -1,0 +1,122 @@
+.intro-animation {
+  position: fixed;
+  inset: 0;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  overflow: hidden;
+  opacity: 1;
+  transition: opacity 1s ease;
+  padding: 1rem;
+  text-align: center;
+}
+
+.intro-animation.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.logo {
+  margin-bottom: 2rem;
+  z-index: 100;
+  animation: blowAway 4s ease forwards;
+  animation-delay: 1s;
+  animation-fill-mode: forwards;
+
+  img {
+    width: 30vw;
+    max-width: 200px;
+    min-width: 120px;
+    height: auto;
+  }
+}
+
+@keyframes blowAway {
+  0% {
+    opacity: 1;
+    transform: translateX(0) scale(1) rotate(0deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(400px) scale(0.95) rotate(10deg);
+  }
+}
+
+.wind {
+  position: absolute;
+  top: 40%;
+  left: -50%;
+  width: 200vw;
+  height: 10vh;
+  background: linear-gradient(90deg, rgba(200, 200, 200, 0.1) 0%, rgba(200, 200, 200, 0.3) 50%, rgba(200, 200, 200, 0.1) 100%);
+  filter: blur(10px);
+  animation: windMove 4s linear forwards;
+  pointer-events: none;
+  opacity: 0.6;
+  z-index: 50;
+}
+
+@keyframes windMove {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.sakura-leaves {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  overflow: visible;
+  z-index: 90;
+}
+
+.leaf {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  background: url('../assets/images/sakura.png') no-repeat center/contain;
+  opacity: 0;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: 1;
+  transform-origin: center;
+}
+
+@keyframes floatRight {
+  0% {
+    transform: translateX(0) translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(110vw) translateY(-30vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .logo img {
+    width: 40vw;
+    max-width: 150px;
+    min-width: 100px;
+  }
+
+  .wind {
+    top: 45%;
+    height: 8vh;
+    filter: blur(8px);
+  }
+
+  .leaf {
+    width: 24px;
+    height: 24px;
+  }
+}

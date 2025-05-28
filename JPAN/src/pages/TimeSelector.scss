@@ -1,0 +1,75 @@
+// timeselector.scss
+.time-selector {
+  overflow: hidden;
+  margin: 1.5rem 0;
+
+  .time-line {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    padding-bottom: 1.2rem;
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: #555 transparent;
+  }
+
+  .time-slot {
+    flex: 0 0 auto;
+    padding: 0.7rem 1.3rem;
+    font-family: 'Gill Sans Nova', sans-serif;
+    font-size: 1.1rem;
+    background: #3a2e2e;
+    color: #ccc;
+    border-radius: 8px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.25s ease, color 0.25s ease, transform 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.4);
+  }
+
+  .time-slot:hover:not(.active) {
+    transform: scale(1.1);
+    background: #4f403f;
+    color: #eee;
+  }
+
+  .time-slot.active {
+    background: #83c1a7;
+    color: #1e1b1b;
+    font-weight: 700;
+    box-shadow: 0 0 10px #83c1a7aa;
+  }
+
+  /* Scrollbar styles */
+  .time-line::-webkit-scrollbar {
+    height: 7px;
+  }
+  .time-line::-webkit-scrollbar-thumb {
+    background: #555;
+    border-radius: 3px;
+  }
+}
+
+
+@media (max-width: 768px) {
+  .time-selector {
+    margin: 1rem 0;
+
+    .time-line {
+      gap: 0.7rem;
+      padding-bottom: 1rem;
+    }
+
+    .time-slot {
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .time-selector .time-slot {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.9rem;
+  }
+}

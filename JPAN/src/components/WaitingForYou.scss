@@ -1,0 +1,238 @@
+@font-face {
+  font-family: 'Gilroy Medium';
+  src: url('../fonts/Gilroy-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Gilroy Bold';
+  src: url('../fonts/Gilroy-Bold.woff2') format('woff2');
+  font-weight: bold;
+  font-style: normal;
+}
+
+.waiting-section {
+  padding: 3rem 1rem;
+  background: #fff;
+
+  .waiting-title {
+    text-align: center;
+    font-family: 'Despair Display', sans-serif;
+    font-size: 5.6rem;
+    color: #9DD3BC;
+    margin-bottom: 2rem;
+
+    @media (max-width: 600px) {
+      font-size: 3.5rem;
+      padding: 0 1rem;
+    }
+  }
+
+  .locations-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.3rem;
+    margin-top: 70px;
+
+    @media (max-width: 1000px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (max-width: 700px) {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+  }
+
+  .location-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .carousel-wrapper {
+      width: 100%;
+      height: 650px;
+      overflow: hidden;
+      border-radius: 0.7rem;
+      position: relative;
+
+      @media (max-width: 700px) {
+        height: 300px;
+      }
+    }
+
+    .carousel-images {
+      display: flex;
+      transition: transform 1s ease-in-out;
+    }
+
+    .carousel-images img {
+      width: 100%;
+      height: 650px;
+      object-fit: cover;
+      flex-shrink: 0;
+      border-radius: 0.7rem;
+
+      @media (max-width: 700px) {
+        height: 300px;
+      }
+    }
+
+    .location-info {
+      margin-top: 1rem;
+      width: 100%;
+      padding: 0 1rem;
+
+      .address-line {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        justify-content: center;
+        flex-wrap: wrap;
+
+        .address {
+          font-family: 'Gilroy Bold', sans-serif;
+          font-size: 1.5rem;
+          white-space: nowrap;
+          color: #272727;
+
+          @media (max-width: 500px) {
+            font-size: 1.2rem;
+            white-space: normal;
+            text-align: center;
+          }
+        }
+
+        .metro {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          font-size: 1.5rem;
+
+          .circle {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            flex-shrink: 0;
+          }
+
+          .metro-name {
+            font-family: 'Gilroy Medium', sans-serif;
+            font-size: 1.5rem;
+            white-space: nowrap;
+            color: #272727;
+
+            @media (max-width: 500px) {
+              font-size: 1.2rem;
+              white-space: normal;
+              text-align: center;
+            }
+          }
+        }
+      }
+
+      .location-buttons {
+        display: flex;
+        justify-content: center;
+        margin-top: 1.5rem;
+        gap: 1rem;
+        flex-wrap: wrap;
+
+        .location-btn {
+          background-color: #9DD3BC;
+          color: #fff;
+          padding: 1rem 1.7rem;
+          border-radius: 3rem;
+          text-decoration: none;
+          font-family: 'Gilroy Bold', sans-serif;
+          font-size: 1.3rem;
+          transition: background-color 0.3s ease;
+          border: none;
+          cursor: pointer;
+
+          @media (max-width: 500px) {
+            font-size: 1.1rem;
+            padding: 0.8rem 1.4rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+.lightbox-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+.lightbox-content {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox-content img {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 10px;
+}
+
+.lightbox-close,
+.lightbox-prev,
+.lightbox-next {
+  position: absolute;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 2.5rem;
+  cursor: pointer;
+  z-index: 1001;
+
+  @media (max-width: 500px) {
+    font-size: 2rem;
+  }
+}
+
+.lightbox-close {
+  top: -40px;
+  right: -40px;
+
+  @media (max-width: 600px) {
+    top: -20px;
+    right: -20px;
+  }
+}
+
+.lightbox-prev {
+  left: -60px;
+  top: 50%;
+  transform: translateY(-50%);
+
+  @media (max-width: 600px) {
+    left: -30px;
+  }
+}
+
+.lightbox-next {
+  right: -60px;
+  top: 50%;
+  transform: translateY(-50%);
+
+  @media (max-width: 600px) {
+    right: -30px;
+  }
+}

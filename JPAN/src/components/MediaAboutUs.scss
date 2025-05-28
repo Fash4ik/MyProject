@@ -1,0 +1,169 @@
+@font-face {
+  font-family: 'Despair Display';
+  src: url('../fonts/DespairDisplay-Bold.woff2') format('woff2');
+  font-weight: bold;
+  font-style: normal;
+}
+
+.media-about-us {
+  padding: 40px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  margin-top: -80px;
+  box-sizing: border-box;
+}
+
+.media-about-us__title {
+  font-family: 'Despair Display Bold', sans-serif;
+  font-size: 4.5rem;
+  text-align: center;
+  margin-bottom: 40px;
+  color: #A0DAC1;
+  font-stretch: ultra-expanded;
+}
+
+.media-about-us__photos-wrapper {
+  position: relative;
+}
+
+.media-about-us__swipe-hint {
+  position: absolute;
+  top: -30px;
+  left: 10px;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  padding: 8px 14px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  z-index: 10;
+  animation: fadeOut 4s ease forwards;
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.media-about-us__photos {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 40px;
+  flex-wrap: nowrap; 
+  /* Чтобы всегда в один ряд */
+}
+
+.media-about-us__item {
+  flex: 1 1 0;
+  max-width: 380px; /* фиксированная ширина для всех одинаковая */
+  position: relative;
+  overflow: hidden;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.media-about-us__item:hover {
+  transform: scale(1.05);
+}
+
+.media-about-us__image {
+  width: 90%;
+  height: 400px;
+  object-fit: cover;
+  display: block;
+  border-radius: 30px;
+  /* Чтобы картинка была по центру */
+  margin: 0 auto;
+}
+
+/* Текст поверх картинки - с градиентом и мягкими краями */
+.media-about-us__caption {
+  position: absolute;
+  bottom: 0;
+  left: 5%;  /* чтобы совпадать с отступом картинки (90% width + margin auto) */
+  width: 90%;
+  padding: 12px 15px;
+  
+  /* Плавное затемнение с градиентом */
+  background: linear-gradient(
+    to top, 
+    rgba(0, 0, 0, 0.6) 0%, 
+    rgba(0, 0, 0, 0.2) 60%, 
+    rgba(0, 0, 0, 0) 100%
+  );
+  
+  color: #fff;
+  font-family: 'Despair Display Bold', sans-serif;
+  font-size: 1.1rem;
+  text-align: center;
+  margin-bottom: 0;
+  
+  /* Скругляем только нижние углы, чтобы совпадать с картинкой */
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+  
+  box-sizing: border-box;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* Ссылка */
+.media-about-us__link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Карта во всю ширину экрана */
+.media-about-us__map {
+  position: relative;
+  width: 100vw; /* viewport width */
+  max-width: 100vw;
+  height: 400px;
+  margin-left: calc(-50vw + 50%);
+  /* margin-left смещает блок влево на половину viewport минус половина контейнера,
+     чтобы карта растянулась на всю ширину экрана */
+}
+
+/* Адаптив */
+@media (max-width: 900px) {
+  .media-about-us__photos {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    gap: 20px;
+  }
+
+  .media-about-us__item {
+    flex: 0 0 auto;
+    width: 280px;
+    margin-bottom: 0; /* убираем лишний отступ */
+  }
+
+  .media-about-us__image {
+    width: 100%;
+    height: 220px;
+    margin: 0 auto;
+  }
+
+  .media-about-us__caption {
+    left: 0;
+    width: 100%;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+  }
+
+  .media-about-us__map {
+    margin-left: 0;
+    width: 100%;
+  }
+}
