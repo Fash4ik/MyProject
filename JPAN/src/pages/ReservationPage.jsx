@@ -6,24 +6,6 @@ import TableModal from './TableModal';
 
 const STORAGE_KEY = 'bookings';
 
-// Возвращает список временных слотов (на 1.5 часа вперёд)
-function getBlockedTimeSlots(startTimeStr) {
-  const [hours, minutes] = startTimeStr.split(':').map(Number);
-  const start = new Date(0, 0, 0, hours, minutes);
-  const end = new Date(start.getTime() + 90 * 60 * 1000);
-
-  const slots = [];
-  const current = new Date(start);
-  while (current < end) {
-    const h = current.getHours().toString().padStart(2, '0');
-    const m = current.getMinutes().toString().padStart(2, '0');
-    slots.push(`${h}:${m}`);
-    current.setMinutes(current.getMinutes() + 30);
-  }
-
-  return slots;
-}
-
 function ReservationPage() {
   const [selectedDate, setSelectedDate] = useState(() => {
     const today = new Date();
@@ -46,21 +28,36 @@ function ReservationPage() {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(bookings));
   }, [bookings]);
 
-  // Теперь учитывается и наложение "до" и "после"
   const isTableBooked = (tableId, time, date) => {
-    const selectedBlocked = getBlockedTimeSlots(time);
+    const selectedBlocked = getBlockedTimeSlots(time, 90); // 90 минут по умолчанию
 
     return bookings.some(b => {
       if (b.tableId !== tableId || b.date !== date) return false;
 
-      const bookedBlocked = getBlockedTimeSlots(b.time);
-      // Проверка на пересечение любых временных слотов
+      const bookedBlocked = getBlockedTimeSlots(b.time, b.duration);
       return selectedBlocked.some(slot => bookedBlocked.includes(slot));
     });
   };
 
-  const handleBooked = (tableId) => {
-    setBookings(prev => [...prev, { tableId, time: selectedTime, date: selectedDate }]);
+  const getBlockedTimeSlots = (startTimeStr, duration) => {
+    const [hours, minutes] = startTimeStr.split(':').map(Number);
+    const start = new Date(0, 0, 0, hours, minutes);
+    const end = new Date(start.getTime() + duration * 60 * 1000);
+
+    const slots = [];
+    const current = new Date(start);
+    while (current < end) {
+      const h = current.getHours().toString().padStart(2, '0');
+      const m = current.getMinutes().toString().padStart(2, '0');
+      slots.push(`${h}:${m}`);
+      current.setMinutes(current.getMinutes() + 30);
+    }
+
+    return slots;
+  };
+
+  const handleBooked = (tableId, time, duration) => {
+    setBookings(prev => [...prev, { tableId, time, date: selectedDate, duration }]);
     setSelectedTable(null);
   };
 
@@ -70,8 +67,9 @@ function ReservationPage() {
         <h1 className="title">БРОНИРОВАНИЕ СТОЛА</h1>
 
         <p className="reservation-info">
-          Бронирование осуществляется <span className="red-text">на 1.5 часа</span> <br />
-          Адрес: <strong>Москва, Ул. Большая Дмитровка 10с4</strong>
+          Адрес: <strong>Москва, Ул. Большая Дмитровка 10с4</strong><p></p>
+          Выберите дату и время бронирования.<br></br>Максимальная длительность — <span className="red-text">3 часа</span>, минимальная — <span className="red-text">30 минут</span>.
+          <br />
         </p>
 
         <label className="date-label">
@@ -100,7 +98,7 @@ function ReservationPage() {
           selectedDate={selectedDate}
           onClose={() => setSelectedTable(null)}
           onBooked={handleBooked}
-          isBooked={isTableBooked(selectedTable.id, selectedTime, selectedDate)}
+          bookings={bookings}
         />
       )}
     </div>

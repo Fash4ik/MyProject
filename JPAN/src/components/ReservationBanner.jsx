@@ -1,15 +1,15 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom'; // импорт
+import { useNavigate } from 'react-router-dom'; 
 import './ReservationBanner.scss';
 import reservation1 from '../assets/reservbanner/1.webp';
 import reservation2 from '../assets/reservbanner/2.webp';
 import reservation3 from '../assets/reservbanner/3.webp';
 
 function ReservationBanner() {
-  const navigate = useNavigate(); // хук для навигации
+  const navigate = useNavigate(); 
 
   const handleReservationClick = () => {
-    navigate('/reservation'); // переход по маршруту
+    navigate('/reservation'); 
   };
 
   return (

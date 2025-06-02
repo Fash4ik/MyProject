@@ -134,10 +134,9 @@ function WaitingForYou({ onScrollToMenu }) {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="location-btn"
-                >
-                  Как добраться
+                > Как добраться
                 </a>
-                {/* Заменяем ссылку кнопкой с вызовом onScrollToMenu */}
+                
                 <button
                   onClick={onScrollToMenu}
                   className="location-btn"
@@ -151,7 +150,6 @@ function WaitingForYou({ onScrollToMenu }) {
         ))}
       </div>
 
-      {/* Lightbox */}
       {lightboxOpen && (
         <div className="lightbox-overlay" onClick={closeLightbox}>
           <div

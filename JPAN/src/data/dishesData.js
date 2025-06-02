@@ -833,7 +833,7 @@ const dishes = [
   },
   {
     id: 89,
-    name: 'Hitachino DAiDai',
+    name: 'Hitachino DaiDai',
     image: '/images/dish89.png',
     calories: 150,
     protein: 0,

@@ -1,4 +1,3 @@
-// App.js
 import { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
@@ -7,14 +6,14 @@ import CalculatorPage from './pages/CalculatorPage';
 import IntroAnimation from './components/IntroAnimation';
 
 function App() {
-  const [showIntro, setShowIntro] = useState(true);     // Показывает интро
-  const [removeIntro, setRemoveIntro] = useState(false); // Удаляет интро из DOM
+  const [showIntro, setShowIntro] = useState(true);     
+  const [removeIntro, setRemoveIntro] = useState(false); 
 
   const handleIntroFinish = () => {
-    setShowIntro(false); // Включаем fade-out
+    setShowIntro(false); 
     setTimeout(() => {
-      setRemoveIntro(true); // Удаляем из DOM после fade-out (1s)
-    }, 1000); // Важно! Совпадает с transition: opacity 1s ease в SCSS
+      setRemoveIntro(true); 
+    }, 1000); 
   };
 
   return (

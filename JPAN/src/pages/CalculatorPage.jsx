@@ -56,81 +56,87 @@ export default function CalculatorPage() {
   }, { calories: 0, protein: 0, fat: 0, carbs: 0 });
 
   const generatePDF = async () => {
-    const doc = new jsPDF('p', 'mm', 'a4');
-    doc.addFileToVFS('Roboto-Regular.ttf', robotoRegularBase64);
-    doc.addFont('Roboto-Regular.ttf', 'Roboto', 'normal');
-    doc.setFont('Roboto');
+  const doc = new jsPDF('p', 'mm', 'a4');
+  doc.addFileToVFS('Roboto-Regular.ttf', robotoRegularBase64);
+  doc.addFont('Roboto-Regular.ttf', 'Roboto', 'normal');
+  doc.setFont('Roboto');
 
-    const startX = 10;
-    let cursorY = 20;
+  const margin = 15;
+  let cursorY = 20;
 
-    doc.setFontSize(18);
-    doc.text("Отчёт по выбранным блюдам", startX, cursorY);
-    cursorY += 10;
+  doc.setFontSize(18);
+  doc.text("Отчёт по выбранным блюдам", margin, cursorY);
+  cursorY += 10;
 
-    const selectedDishes = dishesData.filter(dish => cart[dish.id]);
+  const selectedDishes = dishesData.filter(dish => cart[dish.id]);
 
-    for (const dish of selectedDishes) {
-      const qty = cart[dish.id];
+  for (const dish of selectedDishes) {
+    const qty = cart[dish.id];
 
-      doc.setFontSize(14);
-      doc.text(`${dish.name} x${qty}`, startX, cursorY);
-      cursorY += 7;
+    doc.setFontSize(14);
+    doc.setTextColor(40, 40, 40);
+    doc.text(`${dish.name} ×${qty}`, margin, cursorY);
+    cursorY += 6;
 
-      doc.setFontSize(12);
-      doc.text(`Калории на порцию: ${dish.calories}`, startX, cursorY);
-      cursorY += 7;
+    doc.setFontSize(11);
+    doc.setTextColor(80, 80, 80);
+    doc.text(`Кал: ${dish.calories}   Б: ${dish.protein}   Ж: ${dish.fat}   У: ${dish.carbs}`, margin + 5, cursorY);
+    cursorY += 6;
 
-      if (dish.image) {
-        try {
-          const img = new Image();
-          img.crossOrigin = "anonymous";
-          img.src = dish.image;
+    if (dish.image) {
+      try {
+        const img = new Image();
+        img.crossOrigin = "anonymous";
+        img.src = dish.image;
+        await new Promise((res, rej) => {
+          img.onload = res;
+          img.onerror = rej;
+        });
 
-          await new Promise((res, rej) => {
-            img.onload = res;
-            img.onerror = rej;
-          });
+        const imgProps = doc.getImageProperties(img);
+        const imgWidth = 40;
+        const imgHeight = (imgProps.height * imgWidth) / imgProps.width;
 
-          const imgProps = doc.getImageProperties(img);
-          const imgWidth = 40;
-          const imgHeight = (imgProps.height * imgWidth) / imgProps.width;
-
-          if (cursorY + imgHeight > 280) {
-            doc.addPage();
-            cursorY = 20;
-          }
-
-          doc.addImage(img, 'JPEG', startX, cursorY, imgWidth, imgHeight);
-          cursorY += imgHeight + 10;
-        } catch {
-          cursorY += 10;
+        if (cursorY + imgHeight > 270) {
+          doc.addPage();
+          cursorY = 20;
         }
-      } else {
-        cursorY += 10;
-      }
 
-      if (cursorY > 280) {
-        doc.addPage();
-        cursorY = 20;
+        doc.addImage(img, 'JPEG', margin, cursorY, imgWidth, imgHeight);
+        cursorY += imgHeight + 8;
+      } catch {
+        cursorY += 8;
       }
+    } else {
+      cursorY += 5;
     }
-
-    doc.setFontSize(16);
-    doc.text('Итоговые показатели:', startX, cursorY);
-    cursorY += 8;
-
-    doc.setFontSize(12);
-    doc.text(`Калории: ${totals.calories}`, startX, cursorY);
+  
+    doc.setDrawColor(200);
+    doc.line(margin, cursorY, 200 - margin, cursorY);
     cursorY += 6;
-    doc.text(`Белки: ${totals.protein}`, startX, cursorY);
-    cursorY += 6;
-    doc.text(`Жиры: ${totals.fat}`, startX, cursorY);
-    cursorY += 6;
-    doc.text(`Углеводы: ${totals.carbs}`, startX, cursorY);
 
-    doc.save('report.pdf');
-  };
+    if (cursorY > 270) {
+      doc.addPage();
+      cursorY = 20;
+    }
+  }
+  
+  doc.setFontSize(14);
+  doc.setTextColor(0);
+  doc.text('Итоговые значения КБЖУ', margin, cursorY);
+  cursorY += 8;
+
+  doc.setFontSize(12);
+  doc.text(`Калории: ${totals.calories}`, margin, cursorY);
+  cursorY += 6;
+  doc.text(`Белки: ${totals.protein}`, margin, cursorY);
+  cursorY += 6;
+  doc.text(`Жиры: ${totals.fat}`, margin, cursorY);
+  cursorY += 6;
+  doc.text(`Углеводы: ${totals.carbs}`, margin, cursorY);
+
+  doc.save('report.pdf');
+};
 
   const renderSection = (title, range) => {
     const [start, end] = range;

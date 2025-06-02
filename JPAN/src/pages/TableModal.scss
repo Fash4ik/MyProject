@@ -142,6 +142,7 @@
     margin: 0.8rem auto 0;
     padding: 0.5rem 0.8rem;
     font-size: 0.9rem;
+    box-sizing: border-box;
   }
 
   .tablemodal-window button:not(.tablemodal-close) {
@@ -161,14 +162,46 @@
     font-size: 1.3rem;
   }
 
-  .tablemodal-window input[type='text'],
-  .tablemodal-window input[type='tel'] {
-    padding: 0.4rem 0.7rem;
-    font-size: 0.85rem;
-  }
-
   .tablemodal-window button:not(.tablemodal-close) {
     padding: 0.6rem 0.8rem;
     font-size: 0.85rem;
   }
+}
+
+
+.tablemodal-window label {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-size: 1rem;
+  color: #ccc;
+  margin: 1rem 0 0.5rem;
+  font-weight: 600;
+  user-select: none;
+}
+
+/* Отступ между текстом и селектом */
+.tablemodal-window label select {
+  margin-top: 0.3rem;
+  width: 100%;
+  padding: 0.5rem 0.8rem;
+  border-radius: 6px;
+  border: 1px solid #555;
+  background-color: #3a2e2e;
+  color: #eee;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: border-color 0.3s, background-color 0.3s;
+  appearance: none; /* Убирает дефолтный стиль стрелки в некоторых браузерах */
+  background-image: url("data:image/svg+xml,%3Csvg fill='%23eee' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 16px 16px;
+}
+
+/* При фокусе меняем бордер и фон */
+.tablemodal-window label select:focus {
+  border-color: #83c1a7;
+  outline: none;
+  background-color: #4a3a3a;
 }

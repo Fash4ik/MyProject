@@ -3,24 +3,24 @@ const axios = require('axios');
 const cors = require('cors');
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = 5000;
 
 const TELEGRAM_TOKEN = '7692523461:AAE4ngt6Tl97Q1GhODWv822YaX0hF01Qjpo';
 const CHAT_ID = '697313070';
 
 app.use(cors({
-  origin: '*', // или указать конкретный домен, например: 'https://yourdomain.com'
+  origin: '*', 
   methods: ['GET', 'POST'],
   credentials: true
 }));
 
 app.use(express.json());
 
-// Роут для отправки обычных сообщений (отзывов)
+
 app.post('/send-message', async (req, res) => {
   const { name, email, phone, comment } = req.body;
 
-  // Валидация можно добавить, если надо
+  
 
   const message = `
 📩 <b>Новое сообщение с формы обратной связи:</b>
@@ -45,12 +45,11 @@ app.post('/send-message', async (req, res) => {
   }
 });
 
-// Роут для отправки брони столов
+
 app.post('/send-reservation', async (req, res) => {
   const { name, phone, tableId, startTime, endTime } = req.body;
 
-  // Здесь можно попытаться красиво отформатировать дату и время
-  // Если startTime и endTime — ISO строки, например:
+  
   const formatDateTime = (dateTimeStr) => {
     try {
       const date = new Date(dateTimeStr);
@@ -62,7 +61,7 @@ app.post('/send-reservation', async (req, res) => {
         minute: '2-digit',
       });
     } catch {
-      return dateTimeStr; // если не удалось распарсить — просто вернуть строку
+      return dateTimeStr; 
     }
   };
 

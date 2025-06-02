@@ -13,7 +13,7 @@ import TerraceBanner from '../components/TerraceBanner';
 import ContactBanner from '../components/ContactBanner';
 import KBJUCalculator from '../components/KBJUCalculator';
 import MediaAboutUs from '../components/MediaAboutUs';
-import Sidebar from '../components/Sidebar'; // не забудь импортировать Sidebar
+import Sidebar from '../components/Sidebar'; 
 
 export default function Home() {
   const [showModal, setShowModal] = useState(false);
@@ -30,14 +30,14 @@ export default function Home() {
   const openModal = () => {
     setShowModal(true);
     setClosing(false);
-    setSidebarVisible(false); // скрываем сайдбар при открытии модалки
+    setSidebarVisible(false); 
   };
 
   const closeModal = () => {
     setClosing(true);
     setTimeout(() => {
       setShowModal(false);
-      setSidebarVisible(true); // показываем сайдбар при закрытии модалки
+      setSidebarVisible(true); 
     }, 300);
   };
 
@@ -65,7 +65,7 @@ export default function Home() {
 
   return (
     <div className="home">
-      {/* Рендерим сайдбар только если sidebarVisible === true */}
+      
       {sidebarVisible && (
         <Sidebar
           openModal={openModal}
@@ -76,10 +76,8 @@ export default function Home() {
             KBJUCalculator: KBJUCalculatorRef,
             restaurants: restaurantsRef,
             terrace: terraceRef,
-          }}
-        />
+          }} />
       )}
-
 
       <section className="hero">
         <video
@@ -88,11 +86,9 @@ export default function Home() {
           autoPlay
           loop
           muted
-          playsInline
-        />
-        <button className="schedule-button" onClick={openModal}>
-          Режим работы: пн–вс 11:00–23:00*
-        </button>
+          playsInline />
+          
+        <button className="schedule-button" onClick={openModal}>Режим работы: пн–вс 11:00–23:00*</button>
         <div className="hero-content">
           <div className="blur-background" />
           <img src={logo} alt="J'PAN logo" className="logo-image" />
@@ -100,25 +96,16 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Модалка */}
       {showModal && (
   <div
     className={`modal-overlay ${closing ? 'closing' : ''}`}
-    onClick={closeModal}
-  >
-    <div
-      className={`modal ${closing ? 'closing' : ''}`}
-      onClick={(e) => e.stopPropagation()}
-    >
-      {/* Крестик закрытия */}
-      <button 
-        className="modal-close-btn" 
-        onClick={closeModal} 
-        aria-label="Закрыть модальное окно"
-        type="button"
-      >
-        ×
-      </button>
+    onClick={closeModal}>
+
+  <div
+    className={`modal ${closing ? 'closing' : ''}`}
+    onClick={(e) => e.stopPropagation()} >
+
+      <button className="modal-close-btn" onClick={closeModal} aria-label="Закрыть модальное окно"type="button">×</button>
 
       <h3 className="modal-title">Режим работы</h3>
       <ul className="schedule-list">
@@ -134,9 +121,7 @@ export default function Home() {
         ].map((addr) => (
           <li key={addr}>
             <span className="address">✅ {addr}</span>{' '}
-            <span className="time">
-              Вс–Чт 11:00–23:00, Пт–Сб 11:00–00:00
-            </span>
+            <span className="time">Вс–Чт 11:00–23:00, Пт–Сб 11:00–00:00</span>
           </li>
         ))}
       </ul>
@@ -144,7 +129,6 @@ export default function Home() {
   </div>
 )}
 
-      {/* Прокручиваемые секции с ref */}
       <div ref={reservationRef}>
         <ReservationBanner />
       </div>
@@ -192,18 +176,9 @@ export default function Home() {
         <div className="footer-bar">
           <img src={logo} alt="J'PAN logo" className="footer-logo-img" />
 
-          <button className="footer-schedule-button" onClick={openModal}>
-            Режим работы: пн–вс 11:00–23:00*
-          </button>
+          <button className="footer-schedule-button" onClick={openModal}> Режим работы: пн–вс 11:00–23:00* </button>
 
-          <span
-            className="footer-scroll-top"
-            onClick={scrollToTop}
-            role="button"
-            tabIndex="0"
-          >
-            НАВЕРХ
-          </span>
+          <span className="footer-scroll-top" onClick={scrollToTop} role="button" tabIndex="0">НАВЕРХ</span>
 
           <span className="footer-phone">8 (985) 211-85-58</span>
 

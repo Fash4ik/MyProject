@@ -184,7 +184,7 @@ appearance: none;
   height: 600px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
   animation: scaleUp 0.3s ease forwards;
-  font-family: 'Gilroy', sans-serif;
+  
 }
 
 .modal.closing {
@@ -197,7 +197,6 @@ appearance: none;
 
 .schedule-list .address {
   display: block;
-  font-family: 'Gilroy', sans-serif;
   font-weight: bold;
   font-size: 1.1rem;
   margin-bottom: 2px;
@@ -205,7 +204,7 @@ appearance: none;
 
 .schedule-list .time {
   display: block;
-  font-family: 'Gilroy', sans-serif;
+  
   font-size: 0.95rem;
   color: #000000;
 }
