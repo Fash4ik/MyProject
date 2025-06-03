@@ -91,6 +91,6 @@ app.post('/send-reservation', async (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`Сервер запущен на http://localhost:${PORT}`);
+app.listen(PORT,'0.0.0.0', () => {
+  console.log(`Сервер запущен на порту:${PORT}`);
 });
