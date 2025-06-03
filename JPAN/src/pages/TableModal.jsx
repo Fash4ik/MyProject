@@ -49,7 +49,7 @@ function TableModal({ table, selectedTime, selectedDate, onClose, onBooked, book
     const endTime = new Date(startTime.getTime() + duration * 60 * 1000);
 
     try {
-      const response = await fetch('https://eugene-jpan.ru:5000/send-reservation', {
+      const response = await fetch('http://78.153.149.224:5000/send-reservation', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
