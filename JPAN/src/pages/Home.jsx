@@ -81,12 +81,15 @@ export default function Home() {
 
       <section className="hero">
         <video
-          className="background-video"
-          src={japanAnimation}
-          autoPlay
-          loop
-          muted
-          playsInline />
+  className="background-video"
+  src={japanAnimation}
+  autoPlay
+  loop
+  muted
+  playsInline
+  preload="auto"
+  disablePictureInPicture
+/>
           
         <button className="schedule-button" onClick={openModal}>Режим работы: пн–вс 11:00–23:00*</button>
         <div className="hero-content">

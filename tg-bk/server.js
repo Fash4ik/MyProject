@@ -8,6 +8,7 @@ const PORT = 5000;
 const TELEGRAM_TOKEN = '7692523461:AAE4ngt6Tl97Q1GhODWv822YaX0hF01Qjpo';
 const CHAT_ID = '697313070';
 
+
 app.use(cors({
   origin: '*', 
   methods: ['GET', 'POST'],
