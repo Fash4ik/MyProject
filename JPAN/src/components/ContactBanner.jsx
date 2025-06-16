@@ -15,7 +15,7 @@ const ContactBanner = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch('https://eugene-jpan.ru/send-message', {
+      const response = await fetch('http://78.153.149.224:5000/send-message', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, email, phone, comment }),
